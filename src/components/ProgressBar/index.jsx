@@ -1,6 +1,6 @@
 import { Bar } from "./styled";
 export function ProgressBar({ total, meta }) {
-  const fill = (total / meta) * 100;
+  const fill = Math.min((total / meta) * 100, 100);
 
   return (
     <Bar className="bar">

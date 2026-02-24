@@ -42,6 +42,25 @@ export const Header = styled.div`
   }
 `;
 
+export const FullscreenButton = styled.button`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+  z-index: 100;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.65);
+  }
+`;
+
 export const MetaComplete = styled.div`
   border: 1px solid black;
   background-color: white;

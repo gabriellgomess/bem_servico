@@ -1,28 +1,49 @@
-import { Container, Modal, Header, MetaComplete } from "./styled";
+import { Container, Modal, Header, MetaComplete, FullscreenButton } from "./styled";
 import { ProgressBar } from "../../components/ProgressBar";
 import { useEffect, useState } from "react";
+import Logo from '../../assets/logo_bem_servico.png'
+import Confete from '../../assets/confete.png'
+
+
 const apiUrl = import.meta.env.VITE_URL_BACK_END
+const meta = Number(import.meta.env.VITE_META)
 
 export function Dashboard() {
-  const [total, setTotal] = useState(6000);
-  const [meta] = useState(6000);
+  const [total, setTotal] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
 
   useEffect(() => {
     const fetchData = () => {
-      fetch(`${apiUrl}/dados`)
+      fetch(`${apiUrl}/busca_numero_vendas.php`)
         .then((res) => res.json())
-        .then((data) => setTotal(data))
+        .then((data) => setTotal(data.total))
         .catch((err) => console.error(err));
     };
 
     fetchData();
 
     // Loop para buscar dados de 2 em 2 segundos.
-    // const interval = setInterval(() => {
-    //   fetchData();
-    // }, 2000);
+    const interval = setInterval(() => {
+      fetchData();
+    }, 15000);
 
-    // return () => clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -30,12 +51,12 @@ export function Dashboard() {
       <Header>
         <img
           className="logo"
-          src="../../../public/logo_bem_servico.png"
+          src={Logo}
           alt="logo_bem_servico"
         />
       </Header>
       <Modal>
-        <h2>META DA EQUIPE 2026</h2>
+        <h2>META DA EQUIPE {new Date().getFullYear()}</h2>
         <div className="stats">
           <div className="stat">
             Vendas em Movimento: {total} Vidas &nbsp; | &nbsp; Meta: {meta}{" "}
@@ -45,18 +66,21 @@ export function Dashboard() {
 
         <ProgressBar total={total} meta={meta} />
 
-        {total == meta ? (
+        {total >= meta ? (
           <MetaComplete>
             <h3>
-              <img src="../../../public/confete.png" alt="festa" /> 
+              <img src={Confete} alt="festa" /> 
               &nbsp; META BATIDA - {meta.toLocaleString("pt-BR")} VIDAS &nbsp;
-              <img src="../../../public/confete.png" alt="festa" />
+              <img src={Confete} alt="festa" />
             </h3>
           </MetaComplete>
         ) : (
           <></>
         )}
       </Modal>
+      <FullscreenButton onClick={toggleFullscreen} title={isFullscreen ? 'Sair do fullscreen (Esc)' : 'Tela cheia'}>
+        {isFullscreen ? '⊡' : '⛶'}
+      </FullscreenButton>
     </Container>
   );
 }
