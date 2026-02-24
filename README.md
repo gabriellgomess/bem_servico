@@ -1,16 +1,62 @@
-# React + Vite
+# 📊 Bem Serviço - Dashboard de Vendas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dashboard simples para acompanhamento de metas de vendas da equipe, exibindo o progresso em tempo real através de uma barra de progresso visual.
 
-Currently, two official plugins are available:
+## 🖥️ Visão Geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A aplicação consiste em uma **tela única (Dashboard)** que mostra:
 
-## React Compiler
+- Total de vendas em movimento (vidas)
+- Meta da equipe para 2026
+- Barra de progresso indicando o avanço em relação à meta
+- Mensagem de celebração ao bater a meta 🎉
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tecnologias
 
-## Expanding the ESLint configuration
+- **React 19** — Biblioteca para construção da interface
+- **Vite 7** — Bundler e servidor de desenvolvimento
+- **Styled Components** — Estilização dos componentes
+- **React Router DOM** — Roteamento da aplicação
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/
+│   └── ProgressBar/       # Componente de barra de progresso
+├── pages/
+│   └── Dashboard/         # Página principal do dashboard
+├── assets/                # Arquivos estáticos
+├── App.jsx                # Componente raiz com rotas
+├── main.jsx               # Ponto de entrada da aplicação
+└── index.css              # Estilos globais
+```
+
+## 🚀 Como Rodar
+
+1. **Clone o repositório**
+   ```bash
+   git clone <url-do-repositorio>
+   cd bem_servico
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Configure as variáveis de ambiente**
+
+   Crie um arquivo `.env` na raiz do projeto:
+   ```
+   VITE_URL_BACK_END="https://sua-api-aqui"
+   ```
+
+4. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
+
+## 📡 API
+
+A aplicação consome um endpoint **GET** `/dados` do back-end configurado na variável de ambiente `VITE_URL_BACK_END`, que retorna o total de vendas atual.

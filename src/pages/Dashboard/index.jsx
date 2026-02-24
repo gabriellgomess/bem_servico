@@ -1,6 +1,7 @@
 import { Container, Modal, Header, MetaComplete } from "./styled";
 import { ProgressBar } from "../../components/ProgressBar";
 import { useEffect, useState } from "react";
+const apiUrl = import.meta.env.VITE_URL_BACK_END
 
 export function Dashboard() {
   const [total, setTotal] = useState(6000);
@@ -8,11 +9,10 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchData = () => {
-      console.log("teste");
-      // fetch("https://api.exemplo.com/dados")
-      //   .then((res) => res.json())
-      //   .then((data) => setTotal(data))
-      //   .catch((err) => console.error(err));
+      fetch(`${apiUrl}/dados`)
+        .then((res) => res.json())
+        .then((data) => setTotal(data))
+        .catch((err) => console.error(err));
     };
 
     fetchData();
@@ -42,11 +42,16 @@ export function Dashboard() {
             Vidas
           </div>
         </div>
+
         <ProgressBar total={total} meta={meta} />
 
         {total == meta ? (
           <MetaComplete>
-            <h3>🎉 META BATIDA - {meta.toLocaleString("pt-BR")} VIDAS 🎉</h3>
+            <h3>
+              <img src="../../../public/confete.png" alt="festa" /> 
+              &nbsp; META BATIDA - {meta.toLocaleString("pt-BR")} VIDAS &nbsp;
+              <img src="../../../public/confete.png" alt="festa" />
+            </h3>
           </MetaComplete>
         ) : (
           <></>

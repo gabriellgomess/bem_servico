@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 export const Bar = styled.div`
   width: 100%;
-  height: 50px;
+  height: 100px;
   background: #d8d2d2ff;
-  overflow: hidden;
-  box-shadow: 0 5px 5px 0 black;
 
   .fill {
     display: flex;
-    height: 100%;
+    height: 150px;
     border: none;
+    height: 100%;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
   }
 
   .block {
@@ -21,19 +21,16 @@ export const Bar = styled.div`
 
   .block.active.color1 {
     background: #fb94a6;
-    box-shadow: 0 5px 5px 0 black;
   }
 
   .block.active.color2 {
     background: #f7718aff;
     position: relative;
-    box-shadow: 0 5px 5px 0 black;
   }
 
   .block.last.active.color2 {
     background: #f7718aff;
     position: relative;
-    box-shadow: 0 5px 5px 0 black;
   }
 
   .percentage {
@@ -43,6 +40,7 @@ export const Bar = styled.div`
     transform: translate(-50%, -50%);
     z-index: 3;
     font-size: 1.2rem;
+    font-weight: 500;
   }
 
   .fill-text {

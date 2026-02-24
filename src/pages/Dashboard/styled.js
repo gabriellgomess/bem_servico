@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Modal = styled.div`
-  height: 60vh;
+  height: 410px;
   width: 90vw;
   background: #FF0033;
   border-radius: 70px;
@@ -21,10 +21,10 @@ export const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
   color: white;
   h2 {
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 45px;
   }
 
@@ -42,12 +42,23 @@ export const Header = styled.div`
   }
 `;
 
-
 export const MetaComplete = styled.div`
   border: 1px solid black;
   background-color: white;
-  color: #FF0033;
+  color: #ff0033;
   padding: 25px 100px;
   border-radius: 15px;
   margin-top: 40px;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .icon {
+    font-size: 1.4em;
+    filter: hue-rotate(300deg) saturate(5) brightness(0.7);
+  }
 `;
